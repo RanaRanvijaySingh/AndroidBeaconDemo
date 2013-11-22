@@ -17,11 +17,6 @@ Step 2: Create a simple layout.<br/>
 Step 3: Write the main class.<br/>
 ____________________________________________________________________________________________________________________________________________
 Step 1: Give the permission in the manifest file and declare few services.<br/><br/>
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.webonise.beacondemo"
-    android:versionCode="1"
-    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="18"
@@ -31,19 +26,7 @@ Step 1: Give the permission in the manifest file and declare few services.<br/><
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.webonise.beacondemo.MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+      ....
 
         <service
             android:name="com.radiusnetworks.ibeacon.service.IBeaconService"
@@ -65,17 +48,8 @@ Step 1: Give the permission in the manifest file and declare few services.<br/><
             </intent-filter>
         </service>
     </application>
-
-</manifest>
-
-
 ____________________________________________________________________________________________________________________________________________
 Step 2: Create a simple layout.<br/><br/>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity" >
 
     <TextView
         android:id="@+id/textViewMessage"
@@ -84,38 +58,17 @@ Step 2: Create a simple layout.<br/><br/>
         android:gravity="center"
         android:text="@string/hello_world"
         android:textSize="20sp" />
-
-</LinearLayout>
-
-
 ____________________________________________________________________________________________________________________________________________
 Step 3: Write the main class.<br/><br/>
-package com.webonise.beacondemo;
 
-import java.util.Collection;
-
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.os.RemoteException;
-import android.widget.TextView;
-
-import com.radiusnetworks.ibeacon.IBeacon;
-import com.radiusnetworks.ibeacon.IBeaconConsumer;
-import com.radiusnetworks.ibeacon.IBeaconManager;
-import com.radiusnetworks.ibeacon.RangeNotifier;
-import com.radiusnetworks.ibeacon.Region;
 
 public class MainActivity extends Activity implements IBeaconConsumer {
 
 	private IBeaconManager iBeaconManager = IBeaconManager
 			.getInstanceForApplication(this);
 
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+	....
 		if (isBluetooth())
 			iBeaconManager.bind(this);
 	}
@@ -139,30 +92,14 @@ public class MainActivity extends Activity implements IBeaconConsumer {
 				builder.show();
 			} else
 				return true;
-		} catch (Exception e) {
-			if (!IBeaconManager.getInstanceForApplication(this)
-					.checkAvailability()) {
-				final AlertDialog.Builder builder = new AlertDialog.Builder(
-						this);
-				builder.setTitle("Bluetooth LE not avaliable");
-				builder.setMessage("Sorry, this device does not support Bluetooth LE");
-				builder.setPositiveButton("OK", null);
-				builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						finish();
-						System.exit(0);
-					}
-				});
-				builder.show();
-			}
-		}
+		} 
+		...
+		...
 		return false;
 	}
 
-	@Override
 	protected void onDestroy() {
-		super.onDestroy();
+	...
 		iBeaconManager.unBind(this);
 	}
 
