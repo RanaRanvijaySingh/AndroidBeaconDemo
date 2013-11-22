@@ -9,7 +9,8 @@ This application shows how to use the android phone as a monitor for the beacon 
 <br/>You can download it from this link : 
 <br/><br/>http://developer.radiusnetworks.com/ibeacon/android/download.html
 <br/>
-<br/>After downloading 
+<br/>After downloading import the project as a library in your application.
+
 <br/>
 These are the steps that you need to follow :<br/>
 Step 1: Give the permission in the manifest file and declare few services.<br/>
